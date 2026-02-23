@@ -10,6 +10,13 @@ class TermDepositCalculator {
         this.frequency = "";
     }
 
+    calculateFinalBalance() {
+        let periods;
+        let ratePerPeriod;
+
+        return this.principal + (this.principal * this.rate * this.term);
+    }
+
     getUserInput() {
         const readline = require('readline');
         const rl = readline.createInterface({
