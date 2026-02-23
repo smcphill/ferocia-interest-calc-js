@@ -14,7 +14,25 @@ class TermDepositCalculator {
         let periods;
         let ratePerPeriod;
 
-        return this.principal + (this.principal * this.rate * this.term);
+        if  (this.frequency === "monthly") {
+            periods = this.term * 12;
+            ratePerPeriod = this.rate / 12;
+        } else if (this.frequency === "quarterly") {
+            periods = this.term * 4;
+            ratePerPeriod = this.rate / 4;
+        } else if(this.frequency === "annually") {
+            periods = this.term;
+            ratePerPeriod = this.rate;
+        } else if (this.frequency === "at maturity") {
+            return this.principal + (this.principal * this.rate * this.term);
+        }
+
+        let balance = this.principal;
+        for (let i = 0; i < periods; i++) {
+            balance = balance + (balance * ratePerPeriod);
+        }
+
+        return balance;
     }
 
     getUserInput() {
