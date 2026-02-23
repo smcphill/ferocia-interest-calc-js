@@ -14,13 +14,13 @@ class TermDepositCalculator {
         let periods;
         let ratePerPeriod;
 
-        if  (this.frequency === "monthly") {
+        if (this.frequency === "monthly") {
             periods = this.term * 12;
             ratePerPeriod = this.rate / 12;
         } else if (this.frequency === "quarterly") {
             periods = this.term * 4;
             ratePerPeriod = this.rate / 4;
-        } else if(this.frequency === "annually") {
+        } else if (this.frequency === "annually") {
             periods = this.term;
             ratePerPeriod = this.rate;
         } else if (this.frequency === "at maturity") {
@@ -41,6 +41,9 @@ class TermDepositCalculator {
             input: process.stdin,
             output: process.stdout
         });
+
+        console.log("Term Deposit Calculator");
+        console.log("=======================");
 
         rl.question("Enter start deposit amount: $", (principal) => {
             this.principal = parseFloat(principal);
