@@ -4,9 +4,13 @@
 
 class TermDepositCalculator {
     constructor() {
+        /** principal deposit */
         this.principal = 0;
+        /** interest rate (p.a.) */
         this.rate = 0;
+        /** invetment term (years) */
         this.term = 0;
+        /** interest frequency */
         this.frequency = "";
     }
 
