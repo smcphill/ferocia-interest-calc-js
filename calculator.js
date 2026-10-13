@@ -12,6 +12,16 @@ class TermDepositCalculator {
         this.term = 0;
         /** interest frequency */
         this.frequency = "";
+        /** currency formatting */
+        this.currencyFormatter = new Intl.NumberFormat(
+            "en-US",
+            {
+                style: "currency",
+                currency: "AUD",
+                currencyDisplay: "narrowSymbol",
+                maximumFractionDigits: 0,
+            }
+        );
     }
 
     /**
@@ -76,7 +86,8 @@ class TermDepositCalculator {
 
     displayResult() {
         const final = this.calculateFinalBalance();
-        console.log(`Final balance: $${final}`);
+        const formattedBalance = this.currencyFormatter.format(final);
+        console.log(`Final balance: ${formattedBalance}`);
     }
 
     run() {

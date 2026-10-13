@@ -19,6 +19,11 @@ describe('TermDepositCalculator', function() {
         assert.strictEqual(calc.frequency, "");
     });
 
+    it('should have a whole-dollar currency formatter', function() {
+        assert.strictEqual(calc.currencyFormatter.format(123.123345), "$123");
+        assert.strictEqual(calc.currencyFormatter.format(9.9867), "$10");
+    });
+
     describe('calculateFinalBalance', function() {
         it('should calculate monthly interest', function() {
             calc.principal = 2000;
