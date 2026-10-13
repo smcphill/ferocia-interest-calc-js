@@ -20,12 +20,12 @@ describe('TermDepositCalculator', function() {
     });
 
     it('should calculate monthly interest', function() {
-        calc.principal = 1000;
-        calc.rate = 0.05;
-        calc.term = 1;
+        calc.principal = 2000;
+        calc.rate = 0.025;
+        calc.term = 4;
         calc.frequency = "monthly";
         const result = calc.calculateFinalBalance();
-        assert.ok(result > 1000);
+        assert.strictEqual(result, 2210);
     });
 
     it('should calculate quarterly interest', function() {
