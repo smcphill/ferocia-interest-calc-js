@@ -14,6 +14,10 @@ class TermDepositCalculator {
         this.frequency = "";
     }
 
+    /**
+     *
+     * @returns {float} final balance
+     */
     calculateFinalBalance() {
         let periods;
         let ratePerPeriod;
