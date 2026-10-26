@@ -22,5 +22,5 @@ node calculator.js
 
 Run tests with:
 ```
-npx mocha test_calculator.js
+npm test
 ```

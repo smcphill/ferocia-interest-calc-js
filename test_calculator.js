@@ -19,48 +19,55 @@ describe('TermDepositCalculator', function() {
         assert.strictEqual(calc.frequency, "");
     });
 
-    it('should calculate monthly interest', function() {
-        calc.principal = 1000;
-        calc.rate = 0.05;
-        calc.term = 1;
-        calc.frequency = "monthly";
-        const result = calc.calculateFinalBalance();
-        assert.ok(result > 1000);
+    it('should have a whole-dollar currency formatter', function() {
+        assert.strictEqual(calc.currencyFormatter.format(123.123345), "$123");
+        assert.strictEqual(calc.currencyFormatter.format(9.9867), "$10");
     });
 
-    it('should calculate quarterly interest', function() {
-        calc.principal = 1000;
-        calc.rate = 0.05;
-        calc.term = 1;
-        calc.frequency = "quarterly";
-        const result = calc.calculateFinalBalance();
-        assert.ok(result > 1000);
-    });
+    describe('calculateFinalBalance', function() {
+        it('should calculate monthly interest', function() {
+            calc.principal = 2000;
+            calc.rate = 0.025;
+            calc.term = 4;
+            calc.frequency = "monthly";
+            const result = calc.calculateFinalBalance();
+            assert.strictEqual(result, 2210.111923452672);
+        });
 
-    it('should calculate annual interest', function() {
-        calc.principal = 1000;
-        calc.rate = 0.05;
-        calc.term = 1;
-        calc.frequency = "annually";
-        const result = calc.calculateFinalBalance();
-        assert.strictEqual(result, 1050);
-    });
+        it('should calculate quarterly interest', function() {
+            calc.principal = 10000;
+            calc.rate = 0.03;
+            calc.term = 2;
+            calc.frequency = "quarterly";
+            const result = calc.calculateFinalBalance();
+            assert.strictEqual(result, 10615.988478182753);
+        });
 
-    it('should calculate interest at maturity', function() {
-        calc.principal = 1000;
-        calc.rate = 0.05;
-        calc.term = 1;
-        calc.frequency = "at maturity";
-        const result = calc.calculateFinalBalance();
-        assert.strictEqual(result, 1050);
-    });
+        it('should calculate annual interest', function() {
+            calc.principal = 2400;
+            calc.rate = 0.04;
+            calc.term = 10;
+            calc.frequency = "annually";
+            const result = calc.calculateFinalBalance();
+            assert.strictEqual(result, 3552.5862838040257);
+        });
 
-    it('should handle simple calculation', function() {
-        calc.principal = 100;
-        calc.rate = 0.01;
-        calc.term = 1;
-        calc.frequency = "annually";
-        const result = calc.calculateFinalBalance();
-        assert.ok(result > 100);
+        it('should calculate interest at maturity', function() {
+            calc.principal = 1000;
+            calc.rate = 0.05;
+            calc.term = 3;
+            calc.frequency = "at maturity";
+            const result = calc.calculateFinalBalance();
+            assert.strictEqual(result, 1150);
+        });
+
+        it('should handle simple calculation', function() {
+            calc.principal = 100;
+            calc.rate = 0.01;
+            calc.term = 1;
+            calc.frequency = "annually";
+            const result = calc.calculateFinalBalance();
+            assert.strictEqual(result, 101);
+        });
     });
 });

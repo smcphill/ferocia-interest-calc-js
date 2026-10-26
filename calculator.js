@@ -4,12 +4,30 @@
 
 class TermDepositCalculator {
     constructor() {
+        /** principal deposit */
         this.principal = 0;
+        /** interest rate (p.a.) */
         this.rate = 0;
+        /** invetment term (years) */
         this.term = 0;
+        /** interest frequency */
         this.frequency = "";
+        /** currency formatting */
+        this.currencyFormatter = new Intl.NumberFormat(
+            "en-US",
+            {
+                style: "currency",
+                currency: "AUD",
+                currencyDisplay: "narrowSymbol",
+                maximumFractionDigits: 0,
+            }
+        );
     }
 
+    /**
+     *
+     * @returns {float} final balance
+     */
     calculateFinalBalance() {
         let periods;
         let ratePerPeriod;
@@ -68,7 +86,8 @@ class TermDepositCalculator {
 
     displayResult() {
         const final = this.calculateFinalBalance();
-        console.log(`Final balance: $${final}`);
+        const formattedBalance = this.currencyFormatter.format(final);
+        console.log(`Final balance: ${formattedBalance}`);
     }
 
     run() {
